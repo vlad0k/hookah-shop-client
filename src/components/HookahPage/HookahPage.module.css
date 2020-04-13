@@ -1,0 +1,16 @@
+.HookahPage {
+  padding: 16px;
+
+}
+
+.linksContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  box-sizing: border-box;
+  margin: 8px;
+}

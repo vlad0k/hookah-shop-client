@@ -1,0 +1,39 @@
+.brandDescription {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.brandDescription p {
+  color: #5472d3;
+  font-weight: lighter;
+  padding: 8px;
+  margin: 0;
+  font-size: 2em;
+}
+
+.logo {
+  padding: 24px;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+
+  .brandDescription{
+    max-height: 100px;
+    overflow-y: hidden;
+  }
+
+  .logo {
+    padding: 4px;
+    height: 96px;
+  }
+
+  .brandDescription p {
+    color: #5472d3;
+    font-weight: lighter;
+    padding: 2px;
+    font-size: 0.8em;
+  }
+
+}
