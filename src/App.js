@@ -8,9 +8,12 @@ import { ApolloProvider } from 'react-apollo';
 import Header from './components/Header/Header';
 import HookahPage from './components/HookahPage/HookahPage';
 import ProductPage from './components/ProductPage/ProductPage';
+import AddPage from './components/AddPage/AddPage';
+import AssectoriesPage from './components/AssectoriesPage/AssectoriesPage.js'
 
+const location = window.location.hostname;
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  uri: `http://${location}:4000/graphql`
 });
 
 
@@ -22,11 +25,9 @@ function App() {
         <Header />
 
         <Route  path={'/hookah'} render={() => <HookahPage />}/>
-        <Route
-          path={`/hookah/alpha-hookah/x`}
-          exact
-          render={() => <ProductPage logo='https://lh3.googleusercontent.com/proxy/CELOdjYYi9SMJhnC1EfeSYnNHbKgkvT6fWFAIIUyAhqKqRn8a9W3j93O7H1pzK5-e-zQp9M4CwAryr5q4ULKVrOVsILdXzdRqpPUDm6hWgUoXtOdVCITV8z7UPY'/>}
-        />
+
+        <Route path={'/add'} render={() => <AddPage />} />
+        <Route path={'/assectories'} render={() => <AssectoriesPage />} />
       </div>
     </BrowserRouter>
     </ApolloProvider>

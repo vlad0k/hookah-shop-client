@@ -2,7 +2,6 @@ import React from 'react';
 import logoImage from '../../images/hs-pl.png';
 import styles from './Header.module.css';
 import { NavLink } from "react-router-dom";
-
 const Header = () => {
   return (
     <header>
@@ -13,7 +12,9 @@ const Header = () => {
         </div>
       </NavLink>
       <div className={styles.categories}>
-        <NavLink to="/hookah" activeClassName={styles.activeLink} className={styles.link}>Кальяны</NavLink>
+        <NavLink to="/hookah" activeClassName={styles.activeLink} className={styles.link}>
+          <span>Кальяны</span>
+        </NavLink>
         <NavLink to="/assectories" activeClassName={styles.activeLink} className={styles.link}>Аксессуары</NavLink>
       </div>
     </header>

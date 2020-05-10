@@ -25,6 +25,41 @@ export const getHookahBrandQuery = gql`
         name
         price
         url_name
+        description
+        pictures {
+          name
+        }
+      }
+    }
+  }
+`
+export const getAssectoryCategoriesQuery = gql`
+  {
+    assectoryCategories{
+      id
+      name
+      url_name
+      pictures {
+        name
+      }
+    }
+  }
+`
+
+export const getAssectoryCategoryQuery = gql`
+  query ($id: ID!){
+    assectoryCategory (id: $id){
+      id
+      name
+      pictures {
+        name
+      }
+      items {
+        id
+        name
+        price
+        url_name
+        description
         pictures {
           name
         }

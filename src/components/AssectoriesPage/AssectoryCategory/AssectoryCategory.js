@@ -1,16 +1,17 @@
 import React from 'react';
-import styles from './BrandPage.module.css';
+import styles from './AssectoryCategory.module.css';
 import { Route, Link, useRouteMatch } from "react-router-dom";
 import Picker from '../../Picker/Picker';
 import ProductPage from '../../ProductPage/ProductPage.js';
 
 import { graphql } from 'react-apollo';
-import { getHookahBrandQuery } from '../../../queries/queries.js';
+import { getAssectoryCategoryQuery } from '../../../queries/queries.js';
 
 const BrandPage = (props) => {
   let match = useRouteMatch();
 
-  let data = props.data.hookahBrand;
+  let data = props.data.assectoryCategory;
+  console.log(data);
   const location = window.location.hostname;
 
   return (
@@ -20,6 +21,7 @@ const BrandPage = (props) => {
         exact
         render={() => (
           <div className={styles.BrandPage}>
+
             {data && <h2 className={styles.brandHeader}>{data.name}</h2>}
             <div className={styles.brandDescription}>
               {data && <img className={styles.logo} src={`http://${location}:4000/picture/${data.pictures[0].name}`} alt={data.name}/>}
@@ -30,7 +32,7 @@ const BrandPage = (props) => {
 
             <div className={styles.hookahList}>
               {
-                data && data.hookahs.map((h) =>(
+                data && data.items.map((h) =>(
                   <Link to={`${match.url}/${h.url_name}`}>
                     <Picker name={h.name} price={h.price} logo={`http://${location}:4000/picture/${h.pictures[0].name}`}/>
                   </Link>
@@ -42,11 +44,11 @@ const BrandPage = (props) => {
       />
 
       {
-        data && data.hookahs.map((h) =>{
+        data && data.items.map((h) =>{
           return (
             <Route
               path={`${match.url}/${h.url_name}`}
-              render={() => <ProductPage brandName={data.name} name={h.name} logo={`http://${location}:4000/picture/${h.pictures[0].name}`} price={h.price} description={h.description}/>}
+              render={() => <ProductPage name={h.name} logo={`http://${location}:4000/picture/${h.pictures[0].name}`} price={h.price}/>}
             />
           )
         })
@@ -55,7 +57,7 @@ const BrandPage = (props) => {
   )
 }
 
-export default graphql(getHookahBrandQuery, {
+export default graphql(getAssectoryCategoryQuery, {
   options: (props) => {
     return {
       variables: {
