@@ -8,22 +8,35 @@ import Product from '../Product/ProductContainer';
 
 
 const Content = ({category, brand, setBrand, getAssectoryCategoryQuery, getHookahBrandQuery, product}) => {
-  const className = styles.Content + ' ' + (category && styles['one-row']) + ' ' + (brand && styles['two-rows'] + ' ' + (product && styles['three-rows']))
+
   return (
-
-      <div className={className}>
-        <div className={brand && styles.brands}>
-          <CategoryList category={category} setBrand={setBrand}/>
-        </div>
-        <div className={ product && styles.brands}>
-          {brand  && <BrandsList query={category === 'hookah' ? getHookahBrandQuery : getAssectoryCategoryQuery }/>}
-        </div>
-        <div>
-          {product &&  <Product />}
-        </div>
+    <div className={styles.content}>
+      <div className={(brand && styles.col) + ' ' + styles.categoryList}>
+        <CategoryList category={category} setBrand={setBrand} className={styles.categoryList}/>
       </div>
-
+      {brand && <div className={(product && styles.col) + ' ' + styles.brandsList}>
+        <BrandsList query={category === 'hookah' ? getHookahBrandQuery : getAssectoryCategoryQuery }/>
+        </div>
+      }
+      {product && <div className={styles.productCard}> 
+          <Product />
+        </div>
+      }
+    </div>
   )
 }
 
 export default Content;
+
+
+// <div className={className}>
+//   <div className={styles.col1}>
+//     {category && <CategoryList category={category} setBrand={setBrand} className={styles.categoryList}/>}
+//   </div>
+//   { brand && <div className={ product && styles.col2}>
+//     <BrandsList query={category === 'hookah' ? getHookahBrandQuery : getAssectoryCategoryQuery }/>
+//   </div>}
+//   { product && <div className={styles.col3}>
+//     <Product />
+//   </div>}
+// </div>

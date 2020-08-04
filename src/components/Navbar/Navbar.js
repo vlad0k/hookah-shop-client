@@ -8,10 +8,10 @@ const Navbar = ( { setCategory, category }) => {
     <nav className={styles.navbar}>
       <ul>
         <li onClick={ () => setCategory('hookah') }>
-          <NavButton active={category === 'hookah' ? true : false} value='Кальяны' />
+          <NavButton active={category === 'hookah'} value='Кальяны' />
         </li>
         <li onClick={ () => setCategory('assectories') }>
-          <NavButton active={category === 'assectories' ? true : false} value='Аксессуары' way='/assectories'/>
+          <NavButton active={category === 'assectories'} value='Аксессуары' way='/assectories'/>
         </li>
       </ul>
     </nav>

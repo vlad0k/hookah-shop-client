@@ -4,13 +4,27 @@
   line-height: 120px;
   align-items: center;
   justify-content: center;
-  padding: 0
+  padding: 0;
+
 }
 
 .items-list li {
+  animation-name: presense;
+  animation-duration: 0.6s;
   padding: 16px;
   line-height: normal;
   display: inline-block;
   /* margin-left: 36px; */
 
+}
+
+@keyframes presense {
+  from {
+    opacity: 0;
+    margin-top: 36px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
 }

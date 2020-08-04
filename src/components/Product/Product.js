@@ -15,8 +15,8 @@ const Product = ( { product, setProduct } ) => {
 
   console.log(name, price, pictures, description);
   return(
-    <>
-    <CloseButton  action={setProduct}/>
+    <div>
+    <CloseButton  action={setProduct} type='x'/>
     <div className={ style['product-page'] }>
 
       <h1>{name}</h1>
@@ -24,7 +24,7 @@ const Product = ( { product, setProduct } ) => {
       <span className={ style['product-page'] }>Цена: {price} zl</span>
       <p>{description}</p>
     </div>
-    </>
+    </div>
   )
 }
 

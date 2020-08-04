@@ -4,7 +4,7 @@ import style from './ItemsList.module.css';
 import { ServerContext } from '../../context/ServerContext';
 import Picker from '../Picker/Picker';
 
-const ItemsList = ({ items, pick }) => {
+const ItemsList = ({ items, pick, className }) => {
 
   const { server } = useContext(ServerContext);
 

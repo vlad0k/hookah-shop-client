@@ -7,15 +7,14 @@
   padding: 10px 16px;
   border: 8px solid #1565c0;
   border-radius: 0.5em;
-  transition: 0.3s ease-in-out;
+  transition: 0.3s;
+  cursor: 'none'
 }
 
 .link:hover {
-  transition: 0.3s ease-in-out;
+  transition: 0.3s;
   background-color: rgba(0,0,255, 0.05);
-  /* color: #aaa; */
   cursor: none;
-  transform: scale(1.03);
 }
 
 .active, .active:hover {
@@ -23,16 +22,9 @@
   color: #fff;
 }
 
+
 .active {
+  transition: 0.3s;
   background-color: #1565c0;
   color: #fff;
-}
-
-@media (max-width: 816px) {
-
-  .link {
-    font-size: 1.4em;
-    padding: 4px;
-    border: 6px solid #1565c0;
-  }
 }

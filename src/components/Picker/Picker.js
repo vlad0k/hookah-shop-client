@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import styles from './Picker.module.css';
-import ReactCursorPosition from 'react-cursor-position';
-import { AnimatePresence } from 'framer-motion'
+import React, {useState} from 'react'
+import styles from './Picker.module.css'
+import ReactCursorPosition from 'react-cursor-position'
 import { motion } from 'framer-motion'
 
 const Picker = ({id, logo, name, price, position, pick}) => {
@@ -15,13 +14,12 @@ const Picker = ({id, logo, name, price, position, pick}) => {
     })
   }
   return (
-    <AnimatePresence>
       <motion.div
         className={styles.Picker}
-        whileHover={{scale: 1.1}}
-        whileTap={{scale: 0.9}}
+        whileHover={{scale: 1.03}}
+        whileTap={{scale: 0.97}}
         initial={{scale: 1}}
-        transition={{duration: 0.05}}
+        transition={{duration: 0.03}}
         exit={{scale: 3}}
       >
       <div className={styles.cursorArea} onMouseMove={cursorHandler}>
@@ -38,7 +36,6 @@ const Picker = ({id, logo, name, price, position, pick}) => {
           <span className={styles.price}>{price}</span>
         </div>
       </motion.div>
-    </AnimatePresence>
   )
 }
 

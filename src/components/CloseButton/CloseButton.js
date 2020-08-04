@@ -1,8 +1,10 @@
 import React from 'react';
 import style from './CloseButton.module.css'
-import { IoIosArrowBack } from "react-icons/io"
+import { IoIosArrowBack, IoIosClose } from "react-icons/io"
 
-const CloseButton = ({ action }) => {
+const CloseButton = ({ action, type }) => {
+
+  type = type ? type : 'arrow';
 
   const clickHandler = () => {
     if ((Array.isArray(action))) {
@@ -12,7 +14,8 @@ const CloseButton = ({ action }) => {
 
   return (
     <div className={style.backButton} onClick={clickHandler}>
-      <IoIosArrowBack /><span>Close</span>
+      {(type === 'arrow') && <div class={style.arrow}><IoIosArrowBack /><span>Close</span></div>}
+      {(type === 'x') && <div className={style.x}><IoIosClose /></div>}
     </div>
   )
 }

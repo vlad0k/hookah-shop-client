@@ -1,9 +1,18 @@
 .backButton {
-  padding-top: 16px;
-  display: flex;
-  align-items: center;
+
+
   font-size: 24px;
   width: auto;
   color: #1565c0;
   cursor: pointer;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+}
+
+.x {
+  font-size: 56px;
 }

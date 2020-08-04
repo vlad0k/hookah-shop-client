@@ -6,7 +6,7 @@ import ItemsList from '../../components/ItemsList/ItemsList';
 import { getHookahBrandsQuery, getAssectoryCategoriesQuery } from '../../queries/queries'
 
 
-const CategoryList = ({ category, setBrand }) => {
+const CategoryList = ({ category, setBrand, className }) => {
   let items = [];
   const hookahBrands = useQuery(getHookahBrandsQuery);
   const assectoryCategories = useQuery(getAssectoryCategoriesQuery);
@@ -18,7 +18,7 @@ const CategoryList = ({ category, setBrand }) => {
   else items = assectoryCategories.data.assectoryCategories
 
   return(
-      <ItemsList items={ items } pick={setBrand}/>
+      <ItemsList items={ items } pick={setBrand} className={className}/>
   )
 }
 

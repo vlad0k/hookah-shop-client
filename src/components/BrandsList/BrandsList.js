@@ -8,7 +8,6 @@ import CloseButton from '../../components/CloseButton/CloseButton';
 
 const BrandsList = ({category, brand, query, setBrand, setProduct}) => {
   let items = [];
-
   const {loading, error, data } = useQuery(query, {variables: { id: brand}})
   if (error) return <div>error</div>
   if (loading) return <div>Loading...</div>
@@ -16,13 +15,13 @@ const BrandsList = ({category, brand, query, setBrand, setProduct}) => {
   if (data.assectoryCategory && category === 'assectories') items = data.assectoryCategory.items
   console.log(loading, error, data);
   return (
-    <>
+    <div>
       <CloseButton action={[setBrand, setProduct]} />
 
       <div>
         <ItemsList items={items} pick={(id, items) => setProduct(items.filter(i => i.id === id))}/>
       </div>
-    </>
+    </div>
   )
 }
 
