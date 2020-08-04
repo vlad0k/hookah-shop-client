@@ -1,0 +1,16 @@
+.product-page {
+  color: #1565c0;
+  padding-left: 32px;
+}
+
+.product-page h1{
+  margin-bottom: 1em;
+}
+
+.product-page img {
+  width: 256px
+}
+
+.product-page .price {
+  font-size: 3em;
+}

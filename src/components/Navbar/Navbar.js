@@ -3,15 +3,15 @@ import styles from './Navbar.module.css';
 
 import NavButton from '../NavButton/NavButton';
 
-const Navbar = () => {
+const Navbar = ( { setCategory, category }) => {
   return (
     <nav className={styles.navbar}>
       <ul>
-        <li>
-          <NavButton value='Кальяны' way='/hookah'/>
+        <li onClick={ () => setCategory('hookah') }>
+          <NavButton active={category === 'hookah' ? true : false} value='Кальяны' />
         </li>
-        <li>
-          <NavButton value='Аксессуары' way='/assectories'/>
+        <li onClick={ () => setCategory('assectories') }>
+          <NavButton active={category === 'assectories' ? true : false} value='Аксессуары' way='/assectories'/>
         </li>
       </ul>
     </nav>

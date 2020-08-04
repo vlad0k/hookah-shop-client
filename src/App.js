@@ -1,15 +1,14 @@
-import './App.css';
-
-import { ApolloProvider } from 'react-apollo';
-import {BrowserRouter, Route} from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client'
 import ApolloClient from 'apollo-boost';
 import React from 'react';
+import { Provider } from 'react-redux'
 
-import AddPage from './pages/AddPage/AddPage';
-import ContentPage from './pages/ContentPage/ContentPage';
-import Header from './components/Header/Header';
+import store from './redux/store'
+
+import Header from './components/Header/HeaderContainer'
+import Content from './components/Content/ContentContainer'
+
 import ServerContextProvider from './context/ServerContext';
-import BreadCrumbsProvider from './context/BreadCrumbsContext';
 
 const App = () => {
 
@@ -20,19 +19,12 @@ const App = () => {
 
   return (
     <ServerContextProvider>
-      <BreadCrumbsProvider>
-        <BrowserRouter>
-          <ApolloProvider client={myGraphQLClient}>
-
+        <ApolloProvider client={myGraphQLClient} >
+          <Provider store={store}>
             <Header />
-
-            <Route path='/' component={ContentPage} />
-
-            <Route path='/add' exact component={AddPage} />
-
-          </ApolloProvider>
-        </BrowserRouter>
-      </BreadCrumbsProvider>
+            <Content />
+          </Provider>
+        </ApolloProvider>
     </ServerContextProvider>
   );
 }

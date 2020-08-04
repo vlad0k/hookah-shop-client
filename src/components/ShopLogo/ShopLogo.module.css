@@ -1,3 +1,11 @@
-img {
+.logo {
   width: 128px;
+}
+
+img {
+  transition: 1s
+}
+
+.large {
+  width: 512px;
 }

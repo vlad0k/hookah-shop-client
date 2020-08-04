@@ -1,9 +1,16 @@
 .items-list {
-  line-height: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 120px;
+  align-items: center;
+  justify-content: center;
+  padding: 0
 }
 
 .items-list li {
+  padding: 16px;
   line-height: normal;
   display: inline-block;
-  margin-left: 48px;
+  /* margin-left: 36px; */
+
 }

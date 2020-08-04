@@ -1,13 +1,11 @@
 import React from 'react';
 import style from './NavButton.module.css';
 
-import { NavLink } from 'react-router-dom';
-
-const NavButton = ({value, way}) => {
+const NavButton = ({value, way, active}) => {
   return (
-    <NavLink to={ way } className={style.link} activeClassName={style.active}>
+    <div className={style.link + ' ' + (active && style.active)}>
       <span>{ value }</span>
-    </NavLink>
+    </div>
   )
 }
 

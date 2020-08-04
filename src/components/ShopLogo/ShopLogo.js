@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
-import './ShopLogo.module.css';
+import style from './ShopLogo.module.css';
 
 import { LogoContext } from '../../context/LogoContext';
 
-const ShopLogo = () => {
+const ShopLogo = ({type}) => {
 
   const { logo }  = useContext(LogoContext);
 
+  const logoClassName = type ? style[type] : style.logo;
+
   return (
     <div>
-      <img src={ logo } alt='Hookah Shop Logo' />
+      <img className={logoClassName} src={ logo } alt='Hookah Shop Logo' />
     </div>
   )
 }

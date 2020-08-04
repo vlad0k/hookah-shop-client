@@ -1,0 +1,41 @@
+.Content {
+  display: flex;
+  align-items: top;
+  justify-content: flex-start;
+}
+
+.one-row {
+}
+
+.two-rows {
+}
+
+.three-rows {
+
+}
+
+ .brands {
+  transition: 1px;
+  width: 100%;
+  margin: 0.5vh;
+  height: 85vh;
+  overflow-y: scroll;
+  border-right: 6px solid #1565c0;
+}
+
+.one-row .brands{
+  width: 100%;
+}
+
+.two-rows .brands, .three-rows .brands{
+  width: 25%;
+}
+
+@keyframes slide {
+  from {
+      width: 0%;
+  }
+  to {
+    width: auto;
+  }
+}

@@ -1,5 +1,6 @@
 .navbar {
   width: 100%;
+  transition: 1s
 }
 
 .navbar ul {
