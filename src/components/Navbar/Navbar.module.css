@@ -1,0 +1,16 @@
+.navbar {
+  width: 100%;
+}
+
+.navbar ul {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  grid-gap: 1em;
+}
+
+.navbar li {
+  display: block;
+  /* list-style-type: none; */
+}

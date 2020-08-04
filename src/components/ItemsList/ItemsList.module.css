@@ -1,0 +1,9 @@
+.items-list {
+  line-height: 60px;
+}
+
+.items-list li {
+  line-height: normal;
+  display: inline-block;
+  margin-left: 48px;
+}

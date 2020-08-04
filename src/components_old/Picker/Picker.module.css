@@ -1,6 +1,4 @@
 .Picker {
-  height: 236px;
-  width: 196px;
   cursor: default;
   position: relative;
   display: inline-block;
@@ -18,6 +16,7 @@
 .shine {
   position: absolute;
   background: radial-gradient(rgba(0,0,255,0.1) 10%, rgba(0,0,255,0.01) 95%);
+  /* background: radial-gradient(white 0 ,black, rgba(0,0,0,0) 70%); */
   height: 220%;
   width: 220%;
   opacity: 0;
@@ -32,9 +31,10 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-/* .Picker:hover {
+.Picker:hover {
   transform: scale(1.1);
-} */
+  /* cursor: url('/cursor.png'), pointer; */
+}
 
 .BrandPicker:hover {
   transform: translate(527px, 527px);
@@ -51,12 +51,21 @@
   margin: 4px 0;
 }
 
-/* @media (min-width: 768px) {
+@media (min-width: 768px) {
   .Picker {
     height: 236px;
     width: 196px;
   }
-} */
+}
+@media (min-width: 320px) and (max-width: 768px) {
+  .Picker {
+    border: 4px solid #1565c0;
+  }
 
+  .brandLogo {
+    height: 96px;
+    width: 96px;
+  }
+}
 
 /*# sourceMappingURL=Picker.module.css.map */

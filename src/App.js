@@ -1,36 +1,39 @@
-import React from 'react';
 import './App.css';
-import { BrowserRouter, Route } from "react-router-dom";
-import ApolloClient from 'apollo-boost';
+
 import { ApolloProvider } from 'react-apollo';
+import {BrowserRouter, Route} from 'react-router-dom';
+import ApolloClient from 'apollo-boost';
+import React from 'react';
 
-// components
+import AddPage from './pages/AddPage/AddPage';
+import ContentPage from './pages/ContentPage/ContentPage';
 import Header from './components/Header/Header';
-import HookahPage from './components/HookahPage/HookahPage';
-import ProductPage from './components/ProductPage/ProductPage';
-import AddPage from './components/AddPage/AddPage';
-import AssectoriesPage from './components/AssectoriesPage/AssectoriesPage.js'
+import ServerContextProvider from './context/ServerContext';
+import BreadCrumbsProvider from './context/BreadCrumbsContext';
 
-const location = window.location.hostname;
-const client = new ApolloClient({
-  uri: `http://${location}:4000/graphql`
-});
+const App = () => {
 
+  const location = window.location.hostname;
+  const myGraphQLClient = new ApolloClient({
+    uri: `http://${location}:4000/graphql`
+  });
 
-function App() {
   return (
-    <ApolloProvider client={client}>
-    <BrowserRouter>
-      <div className="App">
-        <Header />
+    <ServerContextProvider>
+      <BreadCrumbsProvider>
+        <BrowserRouter>
+          <ApolloProvider client={myGraphQLClient}>
 
-        <Route  path={'/hookah'} render={() => <HookahPage />}/>
+            <Header />
 
-        <Route path={'/add'} render={() => <AddPage />} />
-        <Route path={'/assectories'} render={() => <AssectoriesPage />} />
-      </div>
-    </BrowserRouter>
-    </ApolloProvider>
+            <Route path='/' component={ContentPage} />
+
+            <Route path='/add' exact component={AddPage} />
+
+          </ApolloProvider>
+        </BrowserRouter>
+      </BreadCrumbsProvider>
+    </ServerContextProvider>
   );
 }
 

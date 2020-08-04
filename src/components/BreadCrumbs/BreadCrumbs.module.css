@@ -1,0 +1,14 @@
+.bread-crumbs {
+  padding: 1em;
+  color: #1565c0;
+  border-bottom: 6px solid #1565c0;
+}
+
+.bread-crumbs li::before {
+  content: '>';
+  margin: 0 4px;
+}
+
+.bread-crumbs li {
+  display: inline-block;
+}
