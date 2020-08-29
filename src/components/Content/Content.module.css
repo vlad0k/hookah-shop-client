@@ -53,3 +53,33 @@
     right: 0;
   }
 }
+
+.mobileBrandName {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    display: block;
+  }
+  .col {
+    display: none;
+  }
+  .brandsList {
+    width: 100%;
+  }
+  .mobileBrandName {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: #1565c0;
+    font-weight: bold;
+    font-size: 2em;
+    padding-top: 12px;
+  }
+
+  .productCard { 
+    width: auto;
+    height: auto;
+  }
+}

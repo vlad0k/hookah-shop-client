@@ -27,6 +27,7 @@ header {
   grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
   justify-items: start;
+  background-color: #fff;
 }
 
 .ordinary + .line {
@@ -40,15 +41,29 @@ header {
   grid-template-columns: 1fr;
   /* align-items: center; */
   justify-items: center;
+  background-color: #fff;
 }
 
 .entry +  .line {
   width: 0
 }
 
-/* @media (max-width: 816px) {
-  header {
+@media screen and (max-width: 768px) {
+  .ordinary {
+    width: 100%;
     grid-template-columns: 1fr;
     justify-items: center;
+    z-index: 100;
   }
-} */
+
+  .p {
+    display: block;
+    font-size: 48px;
+    padding: 0px;
+    margin: 0;
+  }
+
+  .nb-logo {
+    display: block;
+  }
+}

@@ -28,3 +28,10 @@
   background-color: #1565c0;
   color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .link {
+    font-size: 1.2em;
+    border-radius: 1em;
+  }
+}

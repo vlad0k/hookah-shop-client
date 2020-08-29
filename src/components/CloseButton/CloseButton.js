@@ -14,7 +14,7 @@ const CloseButton = ({ action, type }) => {
 
   return (
     <div className={style.backButton} onClick={clickHandler}>
-      {(type === 'arrow') && <div class={style.arrow}><IoIosArrowBack /><span>Close</span></div>}
+      {(type === 'arrow') && <div className={style.arrow}><IoIosArrowBack /><span>Close</span></div>}
       {(type === 'x') && <div className={style.x}><IoIosClose /></div>}
     </div>
   )

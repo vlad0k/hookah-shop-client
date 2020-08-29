@@ -19,6 +19,7 @@ class ContentContainer extends Component {
 const mapStateToProps = (state) => ({
   category: state.app.category,
   brand: state.app.brand,
+  brandName: state.app.brandName,
   product: state.app.product,
 })
 

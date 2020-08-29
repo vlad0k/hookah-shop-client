@@ -7,10 +7,16 @@ import Product from '../Product/ProductContainer';
 
 
 
-const Content = ({category, brand, setBrand, getAssectoryCategoryQuery, getHookahBrandQuery, product}) => {
+
+const Content = ({category, brand, brandName, setBrand, getAssectoryCategoryQuery, getHookahBrandQuery, product}) => {
 
   return (
     <div className={styles.content}>
+
+      {/* for mobile */}
+      {brand && <div className={styles.mobileBrandName}>{brandName}</div>}
+
+
       <div className={(brand && styles.col) + ' ' + styles.categoryList}>
         <CategoryList category={category} setBrand={setBrand} className={styles.categoryList}/>
       </div>
@@ -22,6 +28,7 @@ const Content = ({category, brand, setBrand, getAssectoryCategoryQuery, getHooka
           <Product />
         </div>
       }
+      
     </div>
   )
 }

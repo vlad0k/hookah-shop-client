@@ -14,7 +14,7 @@ const ItemsList = ({ items, pick, className }) => {
       {items.map((i, index) => {
         
         return (
-          <li key={i.id} onClick={() => pick(i.id, items)}>
+          <li key={i.id} onClick={() => pick(i.id, i.name, items)}>
             <div>
               <Picker logo={i.pictures[0].name} name={i.name} id={i.id} price={i.price}/>
             </div>

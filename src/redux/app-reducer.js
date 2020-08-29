@@ -23,7 +23,8 @@ const appReducer = (state = initialState, action) => {
     case SET_BRAND: {
       return {
         ...state,
-        brand: action.brand
+        brand: action.brand,
+        brandName: action.brandName
       }
     }
 
@@ -43,7 +44,7 @@ const appReducer = (state = initialState, action) => {
 }
 
 export const setCategory = (category) => ({type: SET_CATEGORY, category})
-export const setBrand = (brand) => ({type: SET_BRAND, brand})
+export const setBrand = (brand, brandName) => ({type: SET_BRAND, brand, brandName})
 export const setProduct = (product) => ({type: SET_PPRODUCT, product})
 
 export default appReducer;

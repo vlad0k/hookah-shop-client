@@ -20,7 +20,7 @@ const BrandsList = ({category, brand, query, setBrand, setProduct}) => {
       <CloseButton action={[setBrand, setProduct]} />
 
       <div>
-        <ItemsList items={items} pick={(id, items) => {
+        <ItemsList items={items} pick={(id,name, items) => {
           setProduct(null)
           setTimeout(() => setProduct(items.filter(i => i.id === id)))
           
