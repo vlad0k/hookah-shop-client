@@ -2,9 +2,14 @@ import React, {useState} from 'react'
 import styles from './Picker.module.css'
 import ReactCursorPosition from 'react-cursor-position'
 import { motion } from 'framer-motion'
+import preloader from '../../common/25.gif'
+
+import { storage } from '../../firebase'
 
 const Picker = ({id, logo, name, price, position, pick}) => {
+  const [image, setImage] = useState(preloader)
   const [pos, setPos] = useState(position)
+
   const cursorHandler = (e) => {
     const width = e.target.offsetWidth;
     const height = e.target.offsetHeight;
@@ -13,6 +18,8 @@ const Picker = ({id, logo, name, price, position, pick}) => {
       y: position.y - (height/2)
     })
   }
+
+  storage.ref(logo).getDownloadURL().then(url => setImage(url))
   return (
       <motion.div
         className={styles.Picker}
@@ -31,7 +38,7 @@ const Picker = ({id, logo, name, price, position, pick}) => {
         }
         ></span>}
 
-          <img className={styles.brandLogo} src={logo} alt='Alpha Hookah'/>
+          <img style={image === preloader ? {width: 64, height: 64} : {}} className={styles.brandLogo} src={image} alt='Alpha Hookah'/>
           <h3 className={styles.name}>{name}</h3>
           <span className={styles.price}>{price}</span>
         </div>

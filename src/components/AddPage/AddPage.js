@@ -1,163 +1,188 @@
-import React, { useState } from 'react';
-import './AddPage.module.css';
+import React from 'react'
+import { Formik, Form, Field, FastField } from 'formik'
+import './AddPage.module.css'
 
-
-import { useQuery, useMutation } from '@apollo/react-hooks';
-
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { getHookahBrandsQuery, getAssectoryCategoriesQuery } from '../../queries/queries'
 import {
-  addHookahMutation,
-  addPictureMutation,
-  addBrandMutation,
-  addAssectoryCategoryMutation,
-  addAssectoryItemMutation
-} from '../../queries/add-queries.js';
+    addHookahMutation,
+    addPictureMutation,
+    addBrandMutation,
+    addAssectoryCategoryMutation,
+    addAssectoryItemMutation
+  } from '../../queries/add-queries.js';
 
-import { getHookahBrandsQuery, getAssectoryCategoriesQuery } from '../../queries/queries';
+import { storage as firebaseStorage } from '../../firebase'
 
+const AddPage = () => {
 
+    const { loading: l1 , error: err1, data: hookahBrandsData } = useQuery(getHookahBrandsQuery);
+    const {loading: l2 , error: err2, data: assectoryCategoriesData} = useQuery(getAssectoryCategoriesQuery);
 
-const AddPage = (props) => {
-  const [formState, setFormState] = useState({
-    productType: 'hookah',
-    name: '',
-    price: null,
-    file: '',
-    brandId: null,
-    url_name: null,
-    description: null
-  });
+    const[addHookah] = useMutation(addHookahMutation)
+    const[addPicture] = useMutation(addPictureMutation)
+    const[addBrand] = useMutation(addBrandMutation)
+    const[addAssectoryCategory] = useMutation(addAssectoryCategoryMutation)
+    const[addAssectoryItem] = useMutation(addAssectoryItemMutation)
 
-  const dataBrands = useQuery(getHookahBrandsQuery).data;
-  const dataAssectories = useQuery(getAssectoryCategoriesQuery).data;
+    if (l1 || l2) return <h1>Loading...</h1>
+    if (err1 || err2) return <p>{err1 && err1.message} {err2 && err2.message}</p>
 
-  const[addHookah] = useMutation(addHookahMutation);
-  const[addPicture] = useMutation(addPictureMutation);
-  const[addBrand] = useMutation(addBrandMutation);
-  const[addAssectoryCategory] = useMutation(addAssectoryCategoryMutation)
-  const[addAssectoryItem] = useMutation(addAssectoryItemMutation)
+    const { hookahBrands } = hookahBrandsData
+    const { assectoryCategories } = assectoryCategoriesData
 
-  const inputChangeHandler = (e) => {
-    setFormState({...formState, [e.target.name]: e.target.value});
-  }
-
-  const formHandler = (e) => {
-    e.preventDefault();
-    console.log(formState);
-    const url_name = formState.name.toLowerCase().split(' ').join('_');
-    if(formState.productType === 'hookah') {
-      const variables = {
-        name: formState.name,
-        brandId: formState.brandId,
-        price: formState.price,
-        url_name: url_name,
-        description: formState.description
-      };
-
-      addHookah({variables})
-        .then (({data}) => {
-
-          const variables = {
-            name: formState.file.split('\\').pop(),
-            type: 'hookah',
-            relationId: data.addHookah.id,
-          }
-
-          addPicture({variables})
-
-        })
-
+    const initialValues = {
+        productType: 'hookah',
+        name: '',
+        price: 0,
+        photo: '',
+        brandId: undefined,
+        description: ''
     }
+    
+    const onSubmit = (values, actions) => {
+        const url_name = values.name.toLowerCase().split(' ').join('_');
+        if(values.productType === 'hookah') {
+            const variables = {
+                name: values.name,
+                brandId: values.brandId,
+                price: values.price.toString(),
+                url_name: url_name,
+                description: values.description
+            };
+        
+            addHookah({variables})
+                .then (({data}) => {
+        
+                    const variables = {
+                        name: values.photo.name,
+                        type: 'hookah',
+                        relationId: data.addHookah.id,
+                    }
+            
+                    addPicture({variables})
+                    uploadPhoto(values.photo)
+                })
+        
+        }
 
-    if(formState.productType === 'brand') {
-      const variables = {
-        name: formState.name,
-        url_name: url_name,
-      }
+        if(values.productType === 'brand') {
+            const variables = {
+                name: values.name,
+                url_name: url_name,
+            }
+        
+            addBrand({variables})
+                .then(({data}) => {
+                    const variables = {
+                        name: values.photo.name,
+                        type: 'brand',
+                        relationId: data.addBrand.id,
+                    }
+                    addPicture({variables})
+                    uploadPhoto(values.photo)
+                })
+        }
 
-      addBrand({variables})
-        .then(({data}) => {
-          const variables = {
-            name: formState.file.split('\\').pop(),
-            type: 'brand',
-            relationId: data.addBrand.id,
-          }
-          addPicture({variables})
-        })
-    }
+        if(values.productType === 'assectory-category') {
+            const variables = {
+                name: values.name,
+                url_name: url_name,
+            }
+        
+            addAssectoryCategory({variables})
+                .then(({data}) => {
+                    const variables = {
+                        name: values.photo.name,
+                        type: 'assectory-category',
+                        relationId: data.addAssectoryCategory.id,
+                    }
+                    addPicture({variables})
+                    uploadPhoto(values.photo)
+                })
+        }
+        actions.resetForm()
+     }
+    return (
+        <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+        >
+            {
+                formik => {
 
-    if(formState.productType === 'assectory-category') {
-      const variables = {
-        name: formState.name,
-        url_name: url_name,
-      }
+                    const { values: { productType, photo } } = formik;
+                    console.log(photo);
+                    return (
+                        <Form>
+                            <label>
+                                Item
+                                <Field as='select' name='productType' id='productType'>
+                                    <option value='hookah' default>Hookah</option>
+                                    <option value='assectory'>Assectory</option>
+                                    <option value='assectory-category'>Category of assectories</option>
+                                    <option value='brand'>Brand</option>
+                                </Field>
+                            </label>
+                            <div>
 
-      addAssectoryCategory({variables})
-        .then(({data}) => {
-          const variables = {
-            name: formState.file.split('\\').pop(),
-            type: 'assectory-category',
-            relationId: data.addAssectoryCategory.id,
-          }
-          addPicture({variables})
-        })
-    }
+                            </div>
+                            <label>
+                                Name
+                                <Field type='text' name='name' />
+                            </label>
 
-    if(formState.productType === 'assectory') {
-      const variables = {
-        name: formState.name,
-        categoryId: formState.brandId,
-        price: formState.price,
-        url_name: url_name,
-        description: formState.description
-      };
+                            {
+                                ['hookah', 'assectory'].some(e => productType === e) && <label>
+                                    Price
+                                    <Field type='number' name='price' />
+                                </label>
+                            }
 
-      addAssectoryItem({variables})
-        .then (({data}) => {
+                            {
+                                ['hookah', 'assectory'].some(e => productType === e) && <label>
+                                    Brand or Category
+                                    <Field as='select' name='brandId'>
+                                        
+                                        {
+                                            productType === 'hookah' && hookahBrands.map(h => (
+                                                <option key={h.id} value={h.id}>{h.name}</option>
+                                            ))
+                                        }
 
-          const variables = {
-            name: formState.file.split('\\').pop(),
-            type: 'assectory',
-            relationId: data.addAssectoryItem.id,
-          }
+{
+                                            productType === 'assectory' && assectoryCategories.map(a => (
+                                                <option key={a.id} value={a.id}>{a.name}</option>
+                                            ))
+                                        }
 
-          addPicture({variables})
+                                    </Field>
+                                </label>
+                            }
 
-        })
+                            <label>
+                                Description
+                                <Field as='textarea' name='description' />
+                            </label>
 
-    }
+                            <label>
+                                Picture
+                                <input name='photo' type='file' onChange={e => formik.setFieldValue('photo', e.target.files[0])} />
+                            </label>
 
-  }
-
-  return (
-    <div>
-      <h2>Admin Panel</h2>
-      <form onSubmit={formHandler}>
-        <select onChange={inputChangeHandler} name='productType' value={formState.productType}>
-          <option value='hookah' default>Hookah</option>
-          <option value='assectory'>Assectory</option>
-          <option value='assectory-category'>Category of assectories</option>
-          <option value='brand'>Brand</option>
-        </select>
-
-        <input onChange={inputChangeHandler} placeholder='Name' name='name' value={formState.name}/>
-        {(formState.productType === 'hookah' || formState.productType === 'assectory') && <input onChange={inputChangeHandler} type='number' name='price' placeholder='price' value={formState.price}></input>}
-
-        {(formState.productType === 'hookah' || formState.productType === 'assectory') && (<select onChange={inputChangeHandler} name='brandId' value={formState.brandId}>
-          {formState.productType === 'hookah' && dataBrands && dataBrands.hookahBrands.map((b) => (
-            <option value={b.id}>{b.name}</option>
-          ))}
-          {formState.productType === 'assectory' && dataAssectories && dataAssectories.assectoryCategories.map((b) => (
-            <option value={b.id}>{b.name}</option>
-          ))}
-        </select>)}
-
-        { (formState.productType === 'hookah' || formState.productType === 'assectory') && <textarea onChange={inputChangeHandler} name='description' placeholder='Description' value={formState.description}></textarea>}
-        <input onChange={inputChangeHandler} type='file' name='file' value={formState.file}></input>
-        <button>Submit</button>
-      </form>
-
-    </div>
-  )
+                            <button type='submit'>Submit</button>
+                        </Form>
+                    )
+                }
+            }
+            
+        </Formik>
+    );
 }
 
-export default (AddPage);
+export default AddPage;
+
+const uploadPhoto = (photo) => {
+    const storageRef = firebaseStorage.ref(photo.name)
+    storageRef.put(photo)
+}

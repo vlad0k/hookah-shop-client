@@ -26,6 +26,10 @@
 
 .cursorArea {
   cursor: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .cursorArea:hover .shine {
   opacity: 1;
@@ -45,6 +49,7 @@
 .brandLogo {
   height: 160px;
   width: 160px;
+  margin: auto;
 }
 
 .name {

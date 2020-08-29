@@ -14,12 +14,17 @@ const BrandsList = ({category, brand, query, setBrand, setProduct}) => {
   if (data.hookahBrand && category === 'hookah') items = data.hookahBrand.hookahs
   if (data.assectoryCategory && category === 'assectories') items = data.assectoryCategory.items
   console.log(loading, error, data);
+  window.sp = setProduct
   return (
     <div>
       <CloseButton action={[setBrand, setProduct]} />
 
       <div>
-        <ItemsList items={items} pick={(id, items) => setProduct(items.filter(i => i.id === id))}/>
+        <ItemsList items={items} pick={(id, items) => {
+          setProduct(null)
+          setTimeout(() => setProduct(items.filter(i => i.id === id)))
+          
+        }}/>
       </div>
     </div>
   )

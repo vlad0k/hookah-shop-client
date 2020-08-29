@@ -24,6 +24,10 @@ const App = () => {
     uri: `http://${location}:4000/graphql`
   });
 
+  // const myGraphQLClient = new ApolloClient({
+  //   uri: `https://${location}/graphql`
+  // });
+
   return (
     <div className={style.App}>
       <Router>

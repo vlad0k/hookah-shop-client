@@ -1,26 +1,32 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 
 import { ServerContext } from '../../context/ServerContext';
 import style from './ProductPage.module.css';
 
 import CloseButton from '../../components/CloseButton/CloseButton';
 
+import preloader from '../../common/25.gif'
+
+import { storage } from '../../firebase'
+
 
 const Product = ( { product, setProduct } ) => {
+
+  const [mainPicture, setMainPicture] = useState(preloader)
 
   console.log(product);
   const [{ name, price, pictures, description }] = product;
 
-  const { server } = useContext(ServerContext);
+  
+  storage.ref(pictures[0].name).getDownloadURL().then(url => setMainPicture(url))
 
-  console.log(name, price, pictures, description);
   return(
     <div>
     <CloseButton  action={setProduct} type='x'/>
     <div className={ style['product-page'] }>
 
       <h1>{name}</h1>
-      {<img src={`${server}/picture/${pictures[0].name}`} alt={name}/>}
+      {<img style={mainPicture === preloader ? {width: 64, display: 'block'} : {}} src={mainPicture} alt={name}/>}
       <span className={ style['product-page'] }>Цена: {price} zl</span>
       <p>{description}</p>
     </div>
