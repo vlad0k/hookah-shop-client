@@ -15,5 +15,6 @@ class ProductContainer extends Component {
 
 const mapStateToProps = (state) => ({
   product: state.app.product,
+  brandName: state.app.brandName,
 })
 export default connect(mapStateToProps, { setProduct })(ProductContainer)

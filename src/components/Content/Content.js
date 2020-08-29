@@ -14,7 +14,7 @@ const Content = ({category, brand, brandName, setBrand, getAssectoryCategoryQuer
     <div className={styles.content}>
 
       {/* for mobile */}
-      {brand && <div className={styles.mobileBrandName}>{brandName}</div>}
+      {(brand && !product) && <div className={styles.mobileBrandName}>{brandName}</div>}
 
 
       <div className={(brand && styles.col) + ' ' + styles.categoryList}>

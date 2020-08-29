@@ -10,7 +10,7 @@ import preloader from '../../common/25.gif'
 import { storage } from '../../firebase'
 
 
-const Product = ( { product, setProduct } ) => {
+const Product = ( { product, brandName, setProduct } ) => {
 
   const [mainPicture, setMainPicture] = useState(preloader)
 
@@ -25,7 +25,7 @@ const Product = ( { product, setProduct } ) => {
     <CloseButton  action={setProduct} type='x'/>
     <div className={ style['product-page'] }>
 
-      <h1>{name}</h1>
+    <h1>{brandName} {name}</h1>
       {<img style={mainPicture === preloader ? {width: 64, display: 'block'} : {}} src={mainPicture} alt={name}/>}
       <span className={ style['product-page'] }>Цена: {price} zl</span>
       <p>{description}</p>

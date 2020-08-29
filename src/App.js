@@ -20,13 +20,13 @@ import ServerContextProvider from './context/ServerContext';
 const App = () => {
 
   const location = window.location.hostname;
-  const myGraphQLClient = new ApolloClient({
-    uri: `http://${location}:4000/graphql`
-  });
-
   // const myGraphQLClient = new ApolloClient({
-  //   uri: `https://${location}/graphql`
+  //   uri: `http://${location}:4000/graphql`
   // });
+
+  const myGraphQLClient = new ApolloClient({
+    uri: `https://${location}/graphql`
+  });
 
   return (
     <div className={style.App}>
