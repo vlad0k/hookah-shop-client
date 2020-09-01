@@ -1,6 +1,5 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 
-import { ServerContext } from '../../context/ServerContext';
 import style from './ProductPage.module.css';
 
 import CloseButton from '../../components/CloseButton/CloseButton';
@@ -14,7 +13,6 @@ const Product = ( { product, brandName, setProduct } ) => {
 
   const [mainPicture, setMainPicture] = useState(preloader)
 
-  console.log(product);
   const [{ name, price, pictures, description }] = product;
 
   

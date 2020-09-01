@@ -11,9 +11,10 @@ const BrandsList = ({category, brand, query, setBrand, setProduct}) => {
   const {loading, error, data } = useQuery(query, {variables: { id: brand}})
   if (error) return <div>error</div>
   if (loading) return <div>Loading...</div>
+  
   if (data.hookahBrand && category === 'hookah') items = data.hookahBrand.hookahs
   if (data.assectoryCategory && category === 'assectories') items = data.assectoryCategory.items
-  console.log(loading, error, data);
+
   window.sp = setProduct
   return (
     <div>

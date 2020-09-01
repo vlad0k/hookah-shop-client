@@ -1,6 +1,6 @@
 import React from 'react'
-import { Formik, Form, Field, FastField } from 'formik'
-import './AddPage.module.css'
+import { Formik, Form, Field } from 'formik'
+import styles from './AddPage.module.css'
 
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { getHookahBrandsQuery, getAssectoryCategoriesQuery } from '../../queries/queries'
@@ -16,8 +16,12 @@ import { storage as firebaseStorage } from '../../firebase'
 
 const AddPage = () => {
 
-    const { loading: l1 , error: err1, data: hookahBrandsData } = useQuery(getHookahBrandsQuery);
-    const {loading: l2 , error: err2, data: assectoryCategoriesData} = useQuery(getAssectoryCategoriesQuery);
+    const { loading: l1 , error: err1, data: hookahBrandsData } = useQuery(getHookahBrandsQuery, {
+        pollInterval: 500,
+      });
+    const {loading: l2 , error: err2, data: assectoryCategoriesData} = useQuery(getAssectoryCategoriesQuery, {
+        pollInterval: 500,
+    });
 
     const[addHookah] = useMutation(addHookahMutation)
     const[addPicture] = useMutation(addPictureMutation)
@@ -36,7 +40,7 @@ const AddPage = () => {
         name: '',
         price: 0,
         photo: '',
-        brandId: undefined,
+        brandId: '',
         description: ''
     }
     
@@ -61,7 +65,6 @@ const AddPage = () => {
                     }
             
                     addPicture({variables})
-                    uploadPhoto(values.photo)
                 })
         
         }
@@ -80,7 +83,6 @@ const AddPage = () => {
                         relationId: data.addBrand.id,
                     }
                     addPicture({variables})
-                    uploadPhoto(values.photo)
                 })
         }
 
@@ -98,9 +100,34 @@ const AddPage = () => {
                         relationId: data.addAssectoryCategory.id,
                     }
                     addPicture({variables})
-                    uploadPhoto(values.photo)
                 })
         }
+
+        if(values.productType === 'assectory') {
+            const variables = {
+                name: values.name,
+                categoryId: values.brandId,
+                price: values.price.toString(),
+                url_name: url_name,
+                description: values.description
+            };
+        
+            addAssectoryItem({variables})
+                .then (({data}) => {
+        
+                    const variables = {
+                        name: values.photo.name,
+                        type: 'assectory',
+                        relationId: data.addAssectoryItem.id,
+                    }
+        
+                    addPicture({variables})
+                    
+                })
+        
+        }
+
+        uploadPhoto(values.photo)
         actions.resetForm()
      }
     return (
@@ -114,7 +141,7 @@ const AddPage = () => {
                     const { values: { productType, photo } } = formik;
                     console.log(photo);
                     return (
-                        <Form>
+                        <Form className={styles.form}>
                             <label>
                                 Item
                                 <Field as='select' name='productType' id='productType'>
@@ -124,9 +151,7 @@ const AddPage = () => {
                                     <option value='brand'>Brand</option>
                                 </Field>
                             </label>
-                            <div>
-
-                            </div>
+                            
                             <label>
                                 Name
                                 <Field type='text' name='name' />
@@ -143,7 +168,7 @@ const AddPage = () => {
                                 ['hookah', 'assectory'].some(e => productType === e) && <label>
                                     Brand or Category
                                     <Field as='select' name='brandId'>
-                                        
+                                        <option value="" default disabled>-- choose -- </option>
                                         {
                                             productType === 'hookah' && hookahBrands.map(h => (
                                                 <option key={h.id} value={h.id}>{h.name}</option>
@@ -167,7 +192,7 @@ const AddPage = () => {
 
                             <label>
                                 Picture
-                                <input name='photo' type='file' onChange={e => formik.setFieldValue('photo', e.target.files[0])} />
+                                <input name='photo' type='file' defaultValue='' onChange={e => formik.setFieldValue('photo', e.target.files[0])} />
                             </label>
 
                             <button type='submit'>Submit</button>

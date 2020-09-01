@@ -9,6 +9,14 @@ export const getHookahBrandsQuery = gql`
       pictures {
         name
       }
+      hookahs {
+        id
+        name
+        pictures {
+          id 
+          name
+        }
+      }
     }
   }
 `

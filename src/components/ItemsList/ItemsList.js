@@ -1,17 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import style from './ItemsList.module.css';
 
-import { ServerContext } from '../../context/ServerContext';
 import Picker from '../Picker/Picker';
 
-const ItemsList = ({ items, pick, className }) => {
-
-  // const [pictures, setPictures] = useState([])
-  // const { server } = useContext(ServerContext);
+const ItemsList = ({ items, pick }) => {
 
   return (
     <ul className={style["items-list"]}>
-      {items.map((i, index) => {
+      {items.map((i) => {
         
         return (
           <li key={i.id} onClick={() => pick(i.id, i.name, items)}>

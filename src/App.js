@@ -16,17 +16,23 @@ import Content from './components/Content/ContentContainer'
 import AddPage from './components/AddPage/AddPage'
 
 import ServerContextProvider from './context/ServerContext';
+import DeletePage from './components/DeletePage/DeletePage';
 
 const App = () => {
 
-  const location = window.location.hostname;
+  // const location = window.location.hostname;
   // const myGraphQLClient = new ApolloClient({
   //   uri: `http://${location}:4000/graphql`
   // });
 
+  // const myGraphQLClient = new ApolloClient({
+  //   uri: `https://${location}/graphql`
+  // });
+
   const myGraphQLClient = new ApolloClient({
-    uri: `https://${location}/graphql`
+    uri: `https://hookah-shop-server.herokuapp.com/graphql`
   });
+
 
   return (
     <div className={style.App}>
@@ -41,6 +47,9 @@ const App = () => {
                   </Route>
                   <Route path='/add' exact>
                      <AddPage />
+                  </Route>
+                  <Route path='/delete' exact>
+                     <DeletePage />
                   </Route>
                 </Switch>
               </Provider>

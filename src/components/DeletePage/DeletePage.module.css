@@ -1,0 +1,15 @@
+.deletePage li div {
+    display: flex;
+    align-items: center;
+}
+
+.hookahList {
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.hookahList li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
