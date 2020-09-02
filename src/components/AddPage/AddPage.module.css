@@ -7,7 +7,7 @@
   padding: 16px;
 }
 
- .form input, .form textarea, .form select {
+ .form input, .form textarea, .form select, .fileLabel {
   display: block;
   font-size: large;
   padding: 6px 4px;
@@ -19,7 +19,12 @@
 }
 
 .form input[type='file'] {
-  border: none;
+  display: none;
+}
+
+.fileLabel {
+  display: inline-block;
+  width: auto;
 }
 
 .form textarea {
