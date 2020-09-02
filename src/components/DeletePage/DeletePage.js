@@ -35,8 +35,7 @@ const DeletePage = () => {
 
     if (l1 || l2) return <h1>Loading...</h1>
     if (err1 || err2) return <p>{err1 && err1.message} {err2 && err2.message}</p>
-    window.hbs = hookahBrandsData.hookahBrands
-    console.log(window.hbs);
+
     return (
         <div className={styles.deletePage}>
             <ul>
