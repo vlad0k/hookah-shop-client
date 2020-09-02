@@ -50,6 +50,14 @@ export const getAssectoryCategoriesQuery = gql`
       pictures {
         name
       }
+      items {
+        id
+        name
+        pictures {
+          id
+          name
+        }
+      }
     }
   }
 `

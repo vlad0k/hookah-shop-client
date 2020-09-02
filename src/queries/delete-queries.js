@@ -14,3 +14,18 @@ export const removeHookahBrandQuery = gql`
         }
     }
 `
+
+export const removeAssectoryItemQuery = gql`
+    mutation($id: ID!) {
+        removeAssectoryItem(id: $id){
+            id
+        }
+    }
+`
+export const removeAssectoryCategoryQuery = gql`
+    mutation($id: ID!) {
+        removeAssectoryCategory(id: $id){
+            id
+        }
+    }
+`

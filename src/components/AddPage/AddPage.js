@@ -23,6 +23,8 @@ const AddPage = () => {
         pollInterval: 500,
     });
 
+    const fileInputRef = React.createRef();
+
     const[addHookah] = useMutation(addHookahMutation)
     const[addPicture] = useMutation(addPictureMutation)
     const[addBrand] = useMutation(addBrandMutation)
@@ -128,6 +130,7 @@ const AddPage = () => {
         }
 
         uploadPhoto(values.photo)
+        fileInputRef.value = ''
         actions.resetForm()
      }
     return (
@@ -192,7 +195,7 @@ const AddPage = () => {
 
                             <label>
                                 Picture
-                                <input name='photo' type='file' defaultValue='' onChange={e => formik.setFieldValue('photo', e.target.files[0])} />
+                                <input name='photo' type='file' defaultValue='' ref={fileInputRef} onChange={e => formik.setFieldValue('photo', e.target.files[0])} />
                             </label>
 
                             <button type='submit'>Submit</button>
