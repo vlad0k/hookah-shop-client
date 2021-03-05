@@ -21,6 +21,7 @@ const mapStateToProps = (state) => ({
   brand: state.app.brand,
   brandName: state.app.brandName,
   product: state.app.product,
+  displayCart: state.app.displayCart
 })
 
 

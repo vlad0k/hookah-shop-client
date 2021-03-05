@@ -54,8 +54,9 @@ const DeletePage = () => {
 
     return (
         <>
-        <h1>Кальяны</h1>
+        
         <div className={styles.deletePage}>
+            <h1>Кальяны</h1>
             <ul>
                 { 
                     hookahBrandsData.hookahBrands.map(hb => 

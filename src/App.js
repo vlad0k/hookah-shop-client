@@ -17,6 +17,8 @@ import AddPage from './components/AddPage/AddPage'
 
 import ServerContextProvider from './context/ServerContext';
 import DeletePage from './components/DeletePage/DeletePage';
+import CartContextProvider from './context/CartContext';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
 
@@ -39,20 +41,28 @@ const App = () => {
       <Router>
         <ServerContextProvider>
             <ApolloProvider client={myGraphQLClient} >
-              <Provider store={store}>
-                <Switch>
-                  <Route path='/' exact>
-                    <Header />
-                    <Content />
-                  </Route>
-                  <Route path='/add' exact>
-                     <AddPage />
-                  </Route>
-                  <Route path='/delete' exact>
-                     <DeletePage />
-                  </Route>
-                </Switch>
-              </Provider>
+              <CartContextProvider>
+                <Provider store={store}>
+                  <Switch>
+
+                    <Route path='/' exact>
+                      <Header />
+                      <Content />
+                      
+                    </Route>
+                    <Route path='/add' exact>
+                      <AddPage />
+                    </Route>
+                    <Route path='/delete' exact>
+                      <DeletePage />
+                    </Route>
+                    <Route path='/cart' exact>
+                        <Cart />
+                    </Route>
+                    
+                  </Switch>      
+                </Provider>
+              </CartContextProvider>
             </ApolloProvider>
         </ServerContextProvider>
       </Router>

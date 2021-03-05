@@ -1,3 +1,6 @@
+.deletePage {
+    padding: 12px;
+}
 .deletePage li div {
     display: flex;
     align-items: center;

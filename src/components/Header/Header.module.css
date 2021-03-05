@@ -49,13 +49,16 @@ header {
 }
 .adminWrapper {
   position: relative;
-  display: block;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
   width: 100%;
   height: 100%;
 }
 
 .admin {
-  position: absolute;
+  /* position: absolute; */
   margin: 0;
   padding: 0;
   right: 0;
@@ -64,8 +67,8 @@ header {
   justify-content: flex-end;
   align-items: flex-end;
   flex-direction: column; */
-  background: #fff;
   z-index: 1;
+  margin: 0 16px ;
 }
 
 .admin a {
@@ -74,9 +77,15 @@ header {
   color: #1565c0;
 }
 
-.admin {
+.admin ul{
+  display: none;
+  position: absolute;
   list-style: none;
   padding: 4px;
+  background: #fff;
+  border: 2px solid #1565c0;
+  top: 0;
+  right: 0;
 }
 
 .admin li {
@@ -85,13 +94,14 @@ header {
   justify-content: center;
   width: auto;
 }
-.admin li:first-child {
-  display: block;
+
+.admin ul:hover {
+  
+  box-shadow: 4px 4px 16px 5px rgba(0,0,0,0.4);
 }
 
-.admin:hover {
-  border: 2px solid #1565c0;
-  box-shadow: 4px 4px 16px 5px rgba(0,0,0,0.4);
+.admin:hover ul {
+  display: flex;
 }
 .admin:hover li {
   display: flex;

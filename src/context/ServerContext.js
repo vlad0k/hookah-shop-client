@@ -4,7 +4,7 @@ export const ServerContext = createContext();
 
 const ServerContextProvider = (props) => {
 
-  const location = window.location.hostname;
+  // const location = window.location.hostname;
 
   // const server = `http://${location}:4000`;
   // const server = `https://${location}`;

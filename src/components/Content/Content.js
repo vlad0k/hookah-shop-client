@@ -4,11 +4,12 @@ import styles from './Content.module.css'
 import CategoryList from '../CategoryList/CategoryList';
 import BrandsList from '../BrandsList/BrandsListContainer';
 import Product from '../Product/ProductContainer';
+import Cart from '../Cart/Cart';
 
 
 
 
-const Content = ({category, brand, brandName, setBrand, getAssectoryCategoryQuery, getHookahBrandQuery, product}) => {
+const Content = ({category, brand, brandName, setBrand, getAssectoryCategoryQuery, getHookahBrandQuery, product, displayCart}) => {
 
   return (
     <div className={styles.content}>
@@ -16,7 +17,7 @@ const Content = ({category, brand, brandName, setBrand, getAssectoryCategoryQuer
       {/* for mobile */}
       {(brand && !product) && <div className={styles.mobileBrandName}>{brandName}</div>}
 
-
+      {displayCart && <Cart />}
       <div className={(brand && styles.col) + ' ' + styles.categoryList}>
         <CategoryList category={category} setBrand={setBrand} className={styles.categoryList}/>
       </div>

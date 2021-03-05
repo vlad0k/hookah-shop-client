@@ -1,11 +1,13 @@
 const SET_CATEGORY = 'SET-CATEGORY'
 const SET_BRAND = 'SET-BRAND'
 const SET_PPRODUCT = 'SET-PRODUCT'
+const SET_CART_DISPLAY = 'SET-CART-DISPLAY'
 
 const initialState = {
   category: null,
   brand: null,
   product: null,
+  displayCart: false
 }
 
 const appReducer = (state = initialState, action) => {
@@ -35,6 +37,13 @@ const appReducer = (state = initialState, action) => {
       }
     }
 
+    case SET_CART_DISPLAY: {
+      return {
+        ...state,
+        displayCart: action.displayCart
+      }
+    }
+
     default: {
       return {
         ...state
@@ -46,5 +55,6 @@ const appReducer = (state = initialState, action) => {
 export const setCategory = (category) => ({type: SET_CATEGORY, category})
 export const setBrand = (brand, brandName) => ({type: SET_BRAND, brand, brandName})
 export const setProduct = (product) => ({type: SET_PPRODUCT, product})
+export const setCartDisplay = (displayCart) => ({type: SET_CART_DISPLAY, displayCart})
 
 export default appReducer;
