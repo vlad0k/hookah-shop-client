@@ -6,6 +6,7 @@ import Select from "components/ui/Select";
 import Button from "components/ui/Button";
 import { CartContext } from "context/CartContext";
 import classnames from "classnames/bind";
+import { sendOrderInfo } from "tgbot";
 
 const cn = classnames.bind(style);
 
@@ -13,12 +14,14 @@ const Form = () => {
   const { getCart } = useContext(CartContext);
 
   const submitForm = useCallback((values) => {
-    console.log(values);
+    sendOrderInfo(values).then(() => {
+      alert("Ваш заказ был принят!");
+    });
   }, []);
 
   const orderFormInitialValues = useMemo(
     () => ({
-      cart: JSON.stringify(getCart()),
+      cart: getCart(),
       fio: "",
       email: "",
       country: "Украина",
