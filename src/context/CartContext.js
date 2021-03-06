@@ -16,6 +16,10 @@ const CartContextProvider = (props) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   };
 
+  const clearCart = () => {
+    localStorage.removeItem("cart");
+  };
+
   const addToCart = (id, brandName, name, price) => {
     const cart = getCart();
 
@@ -43,7 +47,7 @@ const CartContextProvider = (props) => {
 
   return (
     <CartContext.Provider
-      value={{ addToCart, isInCart, getCart, setCart, deleteItem }}
+      value={{ addToCart, isInCart, getCart, setCart, deleteItem, clearCart }}
     >
       {props.children}
     </CartContext.Provider>

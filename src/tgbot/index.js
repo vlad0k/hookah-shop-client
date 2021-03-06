@@ -30,8 +30,10 @@ export const sendOrderInfo = (order) => {
   const orderMessage = `
 ${order.fio}
 ${order.email}  
+
 Город: ${order.country}, ${order.city}
 Отделение почты: ${order.postOffice}
+
 ${cartInfo.msg}
 Итого: ${cartInfo.sum}грн
 `;

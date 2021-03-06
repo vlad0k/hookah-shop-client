@@ -61,7 +61,9 @@ const Cart = () => {
         >
           {displayOrderForm ? "Отмена" : "Оформить заказ"}
         </Button>
-        {displayOrderForm && <Form />}
+        {displayOrderForm && (
+          <Form closeModal={() => dispatch(setCartDisplay(false))} />
+        )}
       </div>
     </div>
   );

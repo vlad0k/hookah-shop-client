@@ -10,12 +10,14 @@ import { sendOrderInfo } from "tgbot";
 
 const cn = classnames.bind(style);
 
-const Form = () => {
-  const { getCart } = useContext(CartContext);
+const Form = ({ closeModal }) => {
+  const { getCart, clearCart } = useContext(CartContext);
 
   const submitForm = useCallback((values) => {
     sendOrderInfo(values).then(() => {
       alert("Ваш заказ был принят!");
+      closeModal();
+      clearCart();
     });
   }, []);
 
